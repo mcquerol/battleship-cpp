@@ -1,23 +1,51 @@
 #include "COpponentGrid.h"
 
-/***************************************************************************
-*============= Copyright by Darmstadt University of Applied Sciences =======
-****************************************************************************
-* Filename        : COPPONENTGRID.CPP
-* Author          :
-* Description     :
-*
-*
-****************************************************************************/
+/** COpponentGrid constructor
+ *
+ * EMPTY constructor
+ */
+COpponentGrid::COpponentGrid()
+{
 
+}
 
-//System Include Files
+/** COpponentGrid constructor
+ *
+ *  COpponentGrid constructor that takes the own grid size
+ */
+COpponentGrid::COpponentGrid(int rows, int columns)
+{
+	this->rows = rows;
+	this->columns = columns;
+}
 
+/** COpponentGrid::getRows
+ *
+ * return the rows
+ */
+int COpponentGrid::getRows()
+{
+	return this->rows;
+}
 
-//Own Include Files
+/** COpponentGrid::getColumns
+ *
+ * return the columns
+ */
+int COpponentGrid::getColumns()
+{
+	return this->columns;
+}
 
-//Method Implementations
+/** COpponentGrid::getSunkenShips
+ * a vector which contains the coordinates of sunken ships
+ * on the opponent grid
+ */
+const std::vector<CShip> COpponentGrid::getSunkenShips()
+{
+	vector<CShip> ships;
+	ships.reserve(10);
+	//TODO make sure this works
 
-void COpponentGrid::COpponentGrid(int rows, int columns){}
- int COpponentGrid::getRows(){}
- int COpponentGrid::getColumns(){}
+	return ships;
+}

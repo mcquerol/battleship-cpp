@@ -1,22 +1,57 @@
 #include "CBoard.h"
+/** CBoard consctructor
+ *
+ * EMPTY constructor
+ */
+CBoard::CBoard()
+{
 
-/***************************************************************************
-*============= Copyright by Darmstadt University of Applied Sciences =======
-****************************************************************************
-* Filename        : CBOARD.CPP
-* Author          :
-* Description     :
-*
-*
-****************************************************************************/
+}
 
+/** CBoard constructor
+ *
+ * takes in rows and columns as parameters
+ * ownGrid object and opponentGrid objects
+ * are created with those dimensions
+ */
+CBoard::CBoard(int rows, int columns)
+{
+	this->rows = rows;
+	this->columns = columns;
+}
 
-//System Include Files
+/** CBoard::getRows
+ *
+ * return the rows
+ */
+int CBoard::getRows()
+{
+	return this->rows;
+}
 
+/** CBoard::getColumns
+ *
+ * return the columns
+ */
+int CBoard::getColumns()
+{
+	return this->columns;
+}
 
-//Own Include Files
+/** CBoard::getOwnGrid
+ *
+ * returns a reference of the ownGrid object
+ */
+COwnGrid& CBoard::getOwnGrid()
+{
+	return this->ownGrid;
+}
 
-//Method Implementations
-
-CBoard::CBoard(int rows, int columns){}
-void CBoard::operation1(){}
+/** CBoard::opponentGrid
+ *
+ * returns a reference of the opponentGrid object
+ */
+COpponentGrid& CBoard::getOpponentGrid()
+{
+	return this->opponentGrid;
+}
