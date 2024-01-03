@@ -1,21 +1,13 @@
 #include "CShip.h"
-#include <iterator>
-#include <set>
+#include "CGridPosition.h"
 
-CShip::CShip()
-{
 
-}
 /** CShip constructor
  *
  * this constructor takes 2 const CGridPosition references
  * for the bow (beginning) and stern (end) of a ship.
  */
-CShip::CShip(const CGridPosition &bow, const CGridPosition &stern)
-{
-	this->bow = bow;
-	this->stern = stern;
-}
+CShip::CShip(const CGridPosition& bow, const CGridPosition& stern) : bow(bow), stern(stern) {}
 
 /** CShip::isValid
   *
@@ -23,7 +15,7 @@ CShip::CShip(const CGridPosition &bow, const CGridPosition &stern)
   * bow and stern are valid cooridinates for the board
   * length is in between 2 and 5
   */
-bool CShip::isValid()
+bool CShip::isValid() const
 {
 	//check for valid coordinates and check for correct length
 	//TODO check if ship is vertical or horizontal
@@ -41,18 +33,18 @@ bool CShip::isValid()
  *
  * return the bow
  */
-CGridPosition CShip::getBow()
+CGridPosition CShip::getBow() const
 {
-	return this->bow;
+	return bow;
 }
 
 /** CShip::getStern
  *
  * return the stern
  */
-CGridPosition CShip::getStern()
+CGridPosition CShip::getStern() const
 {
-	return this->stern;
+	return stern;
 }
 
 /** CShip::length
@@ -61,20 +53,18 @@ CGridPosition CShip::getStern()
  * length is calculated by finding the stern.row - bow.row
  * or stern.column - bow.column depending on whether it is vertical or horizontal
  */
-int CShip::length()
-{
-	int length;
-
-	if((int)this->bow.getRow() < (int)this->stern.getRow())
-	{
-		length = (int)this->stern.getRow() - ((int)this->bow.getRow()-1);
-	}
-	else if (this->bow.getColumn() < this->stern.getColumn())
-	{
-		length = this->stern.getColumn() - this->bow.getColumn()+1;
-	}
-
-	return length;
+int CShip::length() const {
+    // Calculate and return the length of the ship
+    if (bow.getRow() == stern.getRow()) {
+        // Ship is placed horizontally
+        return std::abs(bow.getColumn() - stern.getColumn()) + 1;
+    } else if (bow.getColumn() == stern.getColumn()) {
+        // Ship is placed vertically
+        return std::abs(bow.getRow() - stern.getRow()) + 1;
+    } else {
+        // Invalid ship orientation
+        return 0;
+    }
 }
 
 /** CShip::occupiedArea
@@ -82,42 +72,23 @@ int CShip::length()
  * returns the size of a set of coordinates which is the area of the board covered
  * by a ship. This is calculated based upon the bow and stern
  */
-const std::set<CGridPosition> CShip::occupiedArea()
-{
-	bool orientation;
-	std::set<CGridPosition> area;
+const std::set<CGridPosition> CShip::occupiedArea() const {
+    std::set<CGridPosition> positions;
 
-	//vertical
-	if((int)this->bow.getRow() < (int)this->stern.getRow())
-	{
-		orientation = true;
-	}
-	//horizontal
-	else if (this->bow.getColumn() < this->stern.getColumn())
-	{
-		orientation = false;
-	}
+    // Example implementation: Assuming the ship is either horizontally or vertically placed
+    if (bow.getRow() == stern.getRow()) {
+        // Ship is placed horizontally
+        for (int col = std::min(bow.getColumn(), stern.getColumn()); col <= std::max(bow.getColumn(), stern.getColumn()); ++col) {
+            positions.insert(CGridPosition(bow.getRow(), col));
+        }
+    } else if (bow.getColumn() == stern.getColumn()) {
+        // Ship is placed vertically
+        for (char row = std::min(bow.getRow(), stern.getRow()); row <= std::max(bow.getRow(), stern.getRow()); ++row) {
+            positions.insert(CGridPosition(row, bow.getColumn()));
+        }
+    }
 
-	int row = (int)this->stern.getRow();
-	int col = this->stern.getColumn();
-
-	area.insert(this->stern);
-	for(int l = 0; l <this->length()-1; l++)
-	{
-		if(orientation)
-		{
-			row--;
-			area.insert({(char)row,this->bow.getColumn()});
-		}
-		else
-		{
-			col--;
-			area.insert({this->bow.getRow(),col});
-		}
-	}
-	area.insert(this->bow);
-
-	return area;
+    return positions;
 }
 
 /** CShip::blockedArea
@@ -126,7 +97,27 @@ const std::set<CGridPosition> CShip::occupiedArea()
  * by a ship but ships cannot touch one another so a minimum of one space needs to be kept between each ship
  * this area also includes the area of the ship
  */
-//const std::set<CGridPosition> CShip::blockedArea()
-//{
-//	return 1;
-//}
+const std::set<CGridPosition> CShip::blockedArea() const {
+    std::set<CGridPosition> blockedPositions = occupiedArea();
+
+    for (const auto& position : occupiedArea()) {
+        // Iterate over adjacent positions in a 3x3 grid centered on the ship position
+        for (int rowOffset = -1; rowOffset <= 1; ++rowOffset) {
+            for (int colOffset = -1; colOffset <= 1; ++colOffset) {
+                // Skip the center position (ship position)
+                if (rowOffset == 0 && colOffset == 0) {
+                    continue;
+                }
+
+                // Calculate the adjacent position
+                char newRow = position.getRow() + rowOffset;
+                int newColumn = position.getColumn() + colOffset;
+
+                // Add the adjacent position to the blocked positions
+                blockedPositions.insert(CGridPosition(newRow, newColumn));
+            }
+        }
+    }
+
+    return blockedPositions;
+}
