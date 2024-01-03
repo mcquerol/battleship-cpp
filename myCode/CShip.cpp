@@ -19,14 +19,8 @@ bool CShip::isValid() const
 {
 	//check for valid coordinates and check for correct length
 	//TODO check if ship is vertical or horizontal
-	if((this->bow.isValid() && this->stern.isValid()) && (this->length() >=2 && this->length() <=5))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return ((this->bow.isValid() && this->stern.isValid()) && (this->length() >=2 && this->length() <=5));
+
 }
 
 /** CShip::getBow
@@ -53,7 +47,8 @@ CGridPosition CShip::getStern() const
  * length is calculated by finding the stern.row - bow.row
  * or stern.column - bow.column depending on whether it is vertical or horizontal
  */
-int CShip::length() const {
+int CShip::length() const
+{
     // Calculate and return the length of the ship
     if (bow.getRow() == stern.getRow()) {
         // Ship is placed horizontally
@@ -72,7 +67,8 @@ int CShip::length() const {
  * returns the size of a set of coordinates which is the area of the board covered
  * by a ship. This is calculated based upon the bow and stern
  */
-const std::set<CGridPosition> CShip::occupiedArea() const {
+const std::set<CGridPosition> CShip::occupiedArea() const
+{
     std::set<CGridPosition> positions;
 
     // Example implementation: Assuming the ship is either horizontally or vertically placed
@@ -97,7 +93,8 @@ const std::set<CGridPosition> CShip::occupiedArea() const {
  * by a ship but ships cannot touch one another so a minimum of one space needs to be kept between each ship
  * this area also includes the area of the ship
  */
-const std::set<CGridPosition> CShip::blockedArea() const {
+const std::set<CGridPosition> CShip::blockedArea() const
+{
     std::set<CGridPosition> blockedPositions = occupiedArea();
 
     for (const auto& position : occupiedArea()) {
