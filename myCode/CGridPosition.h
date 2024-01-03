@@ -1,16 +1,13 @@
 #ifndef CGRIDPOSITION_H
 #define CGRIDPOSITION_H
-#include <iostream>
 
-using namespace std;
+#include <iostream>
 
 class CGridPosition {
 private:
     char row;
     int column;
 public:
-
-    CGridPosition();
 
     /** CGridPosition constructor 1
      *
@@ -31,19 +28,19 @@ public:
      * checks if the
      * row is between 'A' and 'Z' and the column is greater than 1
      */
-    bool isValid();
+    bool isValid() const;
 
     /** CGridPosition::getRow
      *
      * return the row
      */
-    char getRow();
+    char getRow() const;
 
     /** CGridPosition::getColumn
      *
      * return the column
      */
-    int getColumn();
+    int getColumn() const;
 
     /** overloaded cast to string
      *
@@ -67,7 +64,5 @@ public:
      */
     bool operator==(CGridPosition other) const;
 };
-/********************
-**  CLASS END
-*********************/
+
 #endif /* CGRIDPOSITION_H */
