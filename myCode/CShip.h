@@ -15,7 +15,6 @@ private:
     CGridPosition stern;
 public:
 
-    CShip();
     /** CShip constructor
      *
      * this constructor takes 2 const CGridPosition references
