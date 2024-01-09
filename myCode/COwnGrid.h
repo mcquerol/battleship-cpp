@@ -1,9 +1,11 @@
 #ifndef COWNGRID_H
 #define COWNGRID_H
+
 #include "CShip.h"
 #include <iostream>
 #include <vector>
 #include <set>
+
 class COwnGrid {
 private:
 	/** private int rows
@@ -18,18 +20,10 @@ private:
 	 */
     int columns;
 
-    /**
-     * @supplierCardinality 10 
-     */
-    CShip ships;
+    std::vector<CShip> ships;
 
 public:
 
-	/** COwnGrid constructor
-	 *
-	 * EMPTY constructor
-	 */
-    COwnGrid();
 
 	/** COwnGrid constructor
 	 *
@@ -41,13 +35,13 @@ public:
      *
      * return the rows
      */
-    int getRows();
+    int getRows() const ;
 
     /** COwnGrid::getColumns
      *
      * return the columns
      */
-    int getColumns();
+    int getColumns() const;
 
     /** COwnGrid::placeShip
      *
@@ -59,6 +53,6 @@ public:
      * a vector which contains the coordinates of different ships
      * on the own grid
      */
-    const std::vector<CShip>getShips();
+    const std::vector<CShip>getShips() const;
 };
 #endif /* COWNGRID_H */
