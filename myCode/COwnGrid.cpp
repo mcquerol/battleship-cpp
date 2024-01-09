@@ -2,30 +2,18 @@
 
 using namespace std;
 
-/** COwnGrid constructor
- *
- * EMPTY constructor
- */
-COwnGrid::COwnGrid()
-{
-
-}
 
 /** COwnGrid constructor
  *
  *  COwnGrid constructor that takes the own grid size
  */
-COwnGrid::COwnGrid(int rows, int columns)
-{
-	this->rows = rows;
-	this->columns = columns;
-}
+COwnGrid::COwnGrid(int rows, int columns) : rows(rows), columns(columns) {}
 
 /** COwnGrid::getRows
  *
  * return the rows
  */
-int COwnGrid::getRows()
+int COwnGrid::getRows() const
 {
 	return this->rows;
 }
@@ -34,7 +22,7 @@ int COwnGrid::getRows()
  *
  * return the columns
  */
-int COwnGrid::getColumns()
+int COwnGrid::getColumns() const
 {
 	return this->columns;
 }
@@ -45,20 +33,21 @@ int COwnGrid::getColumns()
  */
 bool COwnGrid::placeShip(const CShip& ship)
 {
-	this->ships = ship;
 
-	CShip s(this->ships.getBow(),this->ships.getStern());
-	return true;
-	//TODO make sure this works
+	if(ship.isValid())
+	{
+		ships.push_back(ship);
+		return true;
+	}
+	return false;
+
 }
 
 /** COwnGrid::getShips
  * a vector which contains the coordinates of different ships
  * on the own grid
  */
-const std::vector<CShip> COwnGrid::getShips()
+const std::vector<CShip> COwnGrid::getShips() const
 {
-	vector<CShip> ships;
-	//TODO make sure this works
 	return ships;
 }
