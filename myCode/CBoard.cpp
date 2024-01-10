@@ -6,7 +6,8 @@
  * ownGrid object and opponentGrid objects
  * are created with those dimensions
  */
-CBoard::CBoard(int rows, int columns) : rows(rows), columns(columns), ownGrid(rows, columns), opponentGrid(rows, columns) {}
+CBoard::CBoard(int rows, int columns) : ownGrid(rows, columns), opponentGrid(rows, columns) {}
+
 
 /** CBoard::getRows
  *
@@ -43,3 +44,5 @@ COpponentGrid& CBoard::getOpponentGrid()
 {
 	return opponentGrid;
 }
+
+
