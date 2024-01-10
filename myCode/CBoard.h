@@ -9,9 +9,10 @@ private:
 	int rows;
 	int columns;
 
+	COwnGrid ownGrid;
+
     COpponentGrid opponentGrid;
 
-    COwnGrid ownGrid;
 
 public:
 
