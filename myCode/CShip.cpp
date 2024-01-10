@@ -69,22 +69,20 @@ int CShip::length() const
  */
 const std::set<CGridPosition> CShip::occupiedArea() const
 {
-    std::set<CGridPosition> positions;
+	std::set<CGridPosition> positions;
 
-    // Example implementation: Assuming the ship is either horizontally or vertically placed
-    if (bow.getRow() == stern.getRow()) {
-        // Ship is placed horizontally
-        for (int col = std::min(bow.getColumn(), stern.getColumn()); col <= std::max(bow.getColumn(), stern.getColumn()); ++col) {
-            positions.insert(CGridPosition(bow.getRow(), col));
-        }
-    } else if (bow.getColumn() == stern.getColumn()) {
-        // Ship is placed vertically
-        for (char row = std::min(bow.getRow(), stern.getRow()); row <= std::max(bow.getRow(), stern.getRow()); ++row) {
-            positions.insert(CGridPosition(row, bow.getColumn()));
-        }
-    }
+	    // Assuming the ship is aligned horizontally or vertically
+	    if (bow.getRow() == stern.getRow()) {
+	        for (int col = bow.getColumn(); col <= stern.getColumn(); ++col) {
+	            positions.insert(CGridPosition(bow.getRow(), col));
+	        }
+	    } else if (bow.getColumn() == stern.getColumn()) {
+	        for (int row = bow.getRow(); row <= stern.getRow(); ++row) {
+	            positions.insert(CGridPosition(row, bow.getColumn()));
+	        }
+	    }
 
-    return positions;
+	    return positions;
 }
 
 /** CShip::blockedArea

@@ -55,6 +55,7 @@ CConsoleView::~CConsoleView()
  */
 void CConsoleView::print() {
     cout << " OWN GRID\t\t OPPONENT GRID" << endl;
+    cout << " ";
     for (int col = 0; col < board->getColumns(); col++) {
         cout << " " << col + 1; // column numbers
     }

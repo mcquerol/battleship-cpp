@@ -20,7 +20,7 @@ private:
 	 */
     int columns;
 
-    std::vector<CShip> ships;
+    std::vector<CShip*> ships;
 
 public:
 
@@ -53,6 +53,6 @@ public:
      * a vector which contains the coordinates of different ships
      * on the own grid
      */
-    const std::vector<CShip>getShips() const;
+    const std::vector<CShip*>&getShips() const;
 };
 #endif /* COWNGRID_H */

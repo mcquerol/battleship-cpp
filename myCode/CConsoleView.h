@@ -11,16 +11,7 @@ private:
 	 */
     CBoard* board;
 
-    /** 2d ownGrid char array
-     *
-     * creating a 2d array for own grid
-     */
     char** ownGrid;
-
-    /** 2d opponentGrid char array
-     *
-     * creating a 2d array for opponentGrid
-     */
     char** opponentGrid;
 public:
 
