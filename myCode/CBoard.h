@@ -1,26 +1,20 @@
 #ifndef CBOARD_H
 #define CBOARD_H
+
 #include "COpponentGrid.h"
 #include "COwnGrid.h"
+
 class CBoard {
 private:
 	int rows;
 	int columns;
-    /**@link aggregation
-     * @supplierCardinality 1*/
+
     COpponentGrid opponentGrid;
-    /**@link aggregation
-     * @supplierCardinality 1*/
+
     COwnGrid ownGrid;
-    /**@link aggregation
-     * @supplierCardinality 1*/
+
 public:
 
-    /** CBoard consctructor
-     *
-     * EMPTY constructor
-     */
-    CBoard();
 
     /** CBoard constructor
      *
@@ -34,13 +28,13 @@ public:
      *
      * return the rows
      */
-    int getRows();
+    int getRows() const;
 
     /** CBoard::getColumns
      *
      * return the columns
      */
-    int getColumns();
+    int getColumns() const;
 
     /** CBoard::getOwnGrid
      *
