@@ -5,6 +5,7 @@
 #include <vector>
 class COpponentGrid {
 private:
+	char** grid;
 	/** private int rows
 	 *
 	 * the rows of player 2's grid
@@ -29,7 +30,7 @@ public:
       *  COpponentGrid constructor that takes the own grid size
       */
      COpponentGrid(int rows, int columns);
-
+     ~COpponentGrid();
      /** COpponentGrid::getRows
       *
       * return the rows
@@ -46,6 +47,7 @@ public:
       * a vector which contains the coordinates of sunken ships
       * on the opponent grid
       */
+     char** getGrid() const;
 
      void markShipAsSunken(const CShip& ship);
 
