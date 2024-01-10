@@ -1,12 +1,4 @@
 #include "CBoard.h"
-/** CBoard consctructor
- *
- * EMPTY constructor
- */
-CBoard::CBoard()
-{
-
-}
 
 /** CBoard constructor
  *
@@ -14,28 +6,24 @@ CBoard::CBoard()
  * ownGrid object and opponentGrid objects
  * are created with those dimensions
  */
-CBoard::CBoard(int rows, int columns)
-{
-	this->rows = rows;
-	this->columns = columns;
-}
+CBoard::CBoard(int rows, int columns) : ownGrid(rows, columns), opponentGrid(rows, columns) {}
 
 /** CBoard::getRows
  *
  * return the rows
  */
-int CBoard::getRows()
+int CBoard::getRows() const
 {
-	return this->rows;
+	return ownGrid.rows;
 }
 
 /** CBoard::getColumns
  *
  * return the columns
  */
-int CBoard::getColumns()
+int CBoard::getColumns() const
 {
-	return this->columns;
+	return ownGrid.columns;
 }
 
 /** CBoard::getOwnGrid
