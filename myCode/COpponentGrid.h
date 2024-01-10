@@ -20,14 +20,9 @@ private:
     /**
      * @supplierCardinality 0..10 
      */
-    CShip sunkenShips;
+    std::vector<CShip> sunkenShips;
 public:
 
-    /** COpponentGrid constructor
-     *
-     * EMPTY constructor
-     */
-     COpponentGrid();
 
      /** COpponentGrid constructor
       *
@@ -39,19 +34,22 @@ public:
       *
       * return the rows
       */
-     int getRows();
+     int getRows() const;
 
      /** COpponentGrid::getColumns
       *
       * return the columns
       */
-     int getColumns();
+     int getColumns() const;
 
      /** COpponentGrid::getSunkenShips
       * a vector which contains the coordinates of sunken ships
       * on the opponent grid
       */
-     const std::vector<CShip>getSunkenShips();
+
+     void markShipAsSunken(const CShip& ship);
+
+     const std::vector<CShip>getSunkenShips() const;
 
 };
 #endif /* COPPONENTGRID_H */
