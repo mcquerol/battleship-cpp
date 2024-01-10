@@ -54,34 +54,33 @@ CConsoleView::~CConsoleView()
  * prints the ownGrid and opponentGrid arrays
  */
 void CConsoleView::print() {
-    cout << " OWN GRID" << endl;
-    for (int col = 0; col < this->board->getColumns(); col++) {
+    cout << " OWN GRID\t\t OPPONENT GRID" << endl;
+    for (int col = 0; col < board->getColumns(); col++) {
         cout << " " << col + 1; // column numbers
     }
+    cout << "\t"; // adjust the separator here
+    for (int col = 0; col < board->getColumns(); col++) {
+        cout << " " << col + 1; // column numbers for opponent grid
+    }
     cout << endl;
-    for (int row = 0; row < this->board->getRows(); row++) {
+
+    for (int row = 0; row < board->getRows(); row++) {
         char c = row + 1 + 64;
         cout << c << " "; // row numbers
-        for (int col = 0; col < this->board->getColumns(); col++) {
+        for (int col = 0; col < board->getColumns(); col++) {
             cout << ownGrid[row][col] << " ";
         }
-        cout << endl;
-    }
 
-    cout << endl;
-    cout << endl;
+        cout << "\t"; // adjust the separator here
 
-    cout << " OPPONENT GRID" << endl;
-    for (int col = 0; col < this->board->getColumns(); col++) {
-        cout << " " << col + 1; // column numbers
-    }
-    cout << endl;
-    for (int row = 0; row < this->board->getRows(); row++) {
-        char c = row + 1 + 64;
-        cout << c << " "; // row numbers
-        for (int col = 0; col < this->board->getColumns(); col++) {
+        cout << c << " "; // row numbers for opponent grid
+        for (int col = 0; col < board->getColumns(); col++) {
             cout << opponentGrid[row][col] << " ";
         }
         cout << endl;
     }
+
+    cout << endl;
 }
+
+
