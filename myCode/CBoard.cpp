@@ -14,7 +14,7 @@ CBoard::CBoard(int rows, int columns) : ownGrid(rows, columns), opponentGrid(row
  */
 int CBoard::getRows() const
 {
-	return ownGrid.rows;
+	return ownGrid.getRows();
 }
 
 /** CBoard::getColumns
@@ -23,7 +23,7 @@ int CBoard::getRows() const
  */
 int CBoard::getColumns() const
 {
-	return ownGrid.columns;
+	return ownGrid.getColumns();
 }
 
 /** CBoard::getOwnGrid
@@ -32,7 +32,7 @@ int CBoard::getColumns() const
  */
 COwnGrid& CBoard::getOwnGrid()
 {
-	return this->ownGrid;
+	return ownGrid;
 }
 
 /** CBoard::opponentGrid
@@ -41,5 +41,5 @@ COwnGrid& CBoard::getOwnGrid()
  */
 COpponentGrid& CBoard::getOpponentGrid()
 {
-	return this->opponentGrid;
+	return opponentGrid;
 }
