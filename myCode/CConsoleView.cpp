@@ -1,27 +1,31 @@
 #include "CConsoleView.h"
 #include "CBoard.h"
+#include <iostream>
+
+using namespace std;
 
 /** CConsoleView constructor
  *
  * takes in board pointer as input parameter
  * defines the ownGrid and opponentGrid arrays
  */
-CConsoleView::CConsoleView(CBoard* board)
+CConsoleView::CConsoleView(CBoard* board) : board(board)
 {
-	this->board = board;
 
-	this->ownGrid = new char*[this->board->getRows()];
-	this->opponentGrid = new char*[this->board->getRows()];
+	//initialize owngrid and opponent grid
+	this->ownGrid = new char*[board->getRows()];
+	this->opponentGrid = new char*[board->getRows()];
 
-	for (int index = 0; index < this->board->getRows(); index++)
+	for (int index = 0; index < board->getRows(); index++)
 	{
-		this->ownGrid[index] = new char[this->board->getColumns()];
-		this->opponentGrid[index] = new char[this->board->getColumns()];
+		this->ownGrid[index] = new char[board->getColumns()];
+		this->opponentGrid[index] = new char[board->getColumns()];
 	}
 
-	for(int row = 0; row < this->board->getRows(); row++)
+	//set every element in each grid to ~ (empty)
+	for(int row = 0; row < board->getRows(); row++)
 	{
-		for(int col = 0; col < this->board->getColumns(); col++)
+		for(int col = 0; col < board->getColumns(); col++)
 		{
 			this->ownGrid[row][col] = '~';
 			this->opponentGrid[row][col] = '~';
@@ -35,10 +39,10 @@ CConsoleView::CConsoleView(CBoard* board)
  */
 CConsoleView::~CConsoleView()
 {
-	for(int index = 0; index < this->board->getRows(); index++)
+	for(int index = 0; index <board->getRows(); index++)
 	{
-		delete [] this->ownGrid;
-		delete [] this->opponentGrid;
+		delete [] ownGrid;
+		delete [] opponentGrid;
 	}
 	delete [] board;
 	delete [] ownGrid;
@@ -49,42 +53,35 @@ CConsoleView::~CConsoleView()
  *
  * prints the ownGrid and opponentGrid arrays
  */
-void CConsoleView::print()
-{
-  	cout << " OWN GRID" << endl;
-	for(int col = 0; col < this->board->getColumns(); col++)
-	{
-		cout << " " << col+1; //column numbers
-	}
-	cout << endl;
-  	for(int row = 0; row < this->board->getRows(); row++)
-	{
-  		char c = row+1+64;
-  		cout << c << " "; // row numbers
-		for(int col = 0; col < this->board->getColumns(); col++)
-	    {
-			cout << ownGrid[row][col] << " ";
-	    }
-		cout << endl;
-	}
+void CConsoleView::print() {
+    cout << " OWN GRID" << endl;
+    for (int col = 0; col < this->board->getColumns(); col++) {
+        cout << " " << col + 1; // column numbers
+    }
+    cout << endl;
+    for (int row = 0; row < this->board->getRows(); row++) {
+        char c = row + 1 + 64;
+        cout << c << " "; // row numbers
+        for (int col = 0; col < this->board->getColumns(); col++) {
+            cout << ownGrid[row][col] << " ";
+        }
+        cout << endl;
+    }
 
-  	cout << endl;
-  	cout << endl;
+    cout << endl;
+    cout << endl;
 
-  	cout << " OPPONENT GRID" << endl;
-	for(int col = 0; col < this->board->getColumns(); col++)
-	{
-		cout << " " << col+1; //column numbers
-	}
-	cout << endl;
-  	for(int row = 0; row < this->board->getRows(); row++)
-	{
-  		char c = row+1+64;
-  		cout << c << " "; // row numbers
-		for(int col = 0; col < this->board->getColumns(); col++)
-	    {
-			cout << opponentGrid[row][col] << " ";
-	    }
-		cout << endl;
-	}
+    cout << " OPPONENT GRID" << endl;
+    for (int col = 0; col < this->board->getColumns(); col++) {
+        cout << " " << col + 1; // column numbers
+    }
+    cout << endl;
+    for (int row = 0; row < this->board->getRows(); row++) {
+        char c = row + 1 + 64;
+        cout << c << " "; // row numbers
+        for (int col = 0; col < this->board->getColumns(); col++) {
+            cout << opponentGrid[row][col] << " ";
+        }
+        cout << endl;
+    }
 }
