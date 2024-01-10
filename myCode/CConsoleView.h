@@ -11,8 +11,6 @@ private:
 	 */
     CBoard* board;
 
-    char** ownGrid;
-    char** opponentGrid;
 public:
 
     /** CConsoleView constructor
