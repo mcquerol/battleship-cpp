@@ -18,9 +18,7 @@ CShip::CShip(const CGridPosition& bow, const CGridPosition& stern) : bow(bow), s
 bool CShip::isValid() const
 {
 	//check for valid coordinates and check for correct length
-
 	return ((this->bow.isValid() && this->stern.isValid()) && (this->length() >=2 && this->length() <=5));
-
 }
 
 /** CShip::getBow
