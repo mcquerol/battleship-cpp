@@ -8,6 +8,7 @@
 
 class COwnGrid {
 private:
+	char** grid;
 	/** private int rows
 	 *
 	 * the rows of player 1's grid
@@ -20,7 +21,7 @@ private:
 	 */
     int columns;
 
-    std::vector<CShip*> ships;
+    std::vector<CShip> ships;
 
 public:
 
@@ -30,6 +31,7 @@ public:
 	 *  COwnGrid constructor that takes the own grid size
 	 */
     COwnGrid(int rows, int columns);
+    ~COwnGrid();
 
     /** COwnGrid::getRows
      *
@@ -49,10 +51,14 @@ public:
      */
     bool placeShip(const CShip& ship);
 
+    char** getGrid() const;
+
+    bool placeShipForTesting(const CShip& ship, int testRow, int testCol);
+
     /** COwnGrid::getShips
      * a vector which contains the coordinates of different ships
      * on the own grid
      */
-    const std::vector<CShip*>&getShips() const;
+    const std::vector<CShip>getShips() const;
 };
 #endif /* COWNGRID_H */
