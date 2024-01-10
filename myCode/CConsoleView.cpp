@@ -9,29 +9,7 @@ using namespace std;
  * takes in board pointer as input parameter
  * defines the ownGrid and opponentGrid arrays
  */
-CConsoleView::CConsoleView(CBoard* board) : board(board)
-{
-
-	//initialize owngrid and opponent grid
-	this->ownGrid = new char*[board->getRows()];
-	this->opponentGrid = new char*[board->getRows()];
-
-	for (int index = 0; index < board->getRows(); index++)
-	{
-		this->ownGrid[index] = new char[board->getColumns()];
-		this->opponentGrid[index] = new char[board->getColumns()];
-	}
-
-	//set every element in each grid to ~ (empty)
-	for(int row = 0; row < board->getRows(); row++)
-	{
-		for(int col = 0; col < board->getColumns(); col++)
-		{
-			this->ownGrid[row][col] = '~';
-			this->opponentGrid[row][col] = '~';
-		}
-	}
-}
+CConsoleView::CConsoleView(CBoard* board) : board(board) {}
 
 /** CConsoleView destructor
  *
@@ -39,14 +17,7 @@ CConsoleView::CConsoleView(CBoard* board) : board(board)
  */
 CConsoleView::~CConsoleView()
 {
-	for(int index = 0; index <board->getRows(); index++)
-	{
-		delete [] ownGrid;
-		delete [] opponentGrid;
-	}
 	delete [] board;
-	delete [] ownGrid;
-	delete [] opponentGrid;
 }
 
 /** CConsoleView::print
@@ -54,6 +25,8 @@ CConsoleView::~CConsoleView()
  * prints the ownGrid and opponentGrid arrays
  */
 void CConsoleView::print() {
+
+
     cout << " OWN GRID\t\t OPPONENT GRID" << endl;
     cout << " ";
     for (int col = 0; col < board->getColumns(); col++) {
@@ -65,23 +38,25 @@ void CConsoleView::print() {
     }
     cout << endl;
 
-    for (int row = 0; row < board->getRows(); row++) {
-        char c = row + 1 + 64;
-        cout << c << " "; // row numbers
-        for (int col = 0; col < board->getColumns(); col++) {
-            cout << ownGrid[row][col] << " ";
-        }
+    for (int row = 0; row < board->getRows(); row++)
+    {
+	   char c = row + 1 + 64;
+	   cout << c << " "; // row numbers
+	   for (int col = 0; col < board->getColumns(); col++) {
+		   cout << board->getOwnGrid().getGrid()[row][col] << " ";
+	   }
 
-        cout << "\t"; // adjust the separator here
+	   cout << "\t"; // adjust the separator here
 
-        cout << c << " "; // row numbers for opponent grid
-        for (int col = 0; col < board->getColumns(); col++) {
-            cout << opponentGrid[row][col] << " ";
-        }
-        cout << endl;
+	   cout << c << " "; // row numbers for opponent grid
+	   for (int col = 0; col < board->getColumns(); col++) {
+		   cout << board->getOpponentGrid().getGrid()[row][col] << " ";
+	   }
+	   cout << endl;
     }
 
     cout << endl;
 }
+
 
 
