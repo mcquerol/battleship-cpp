@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <map>
+#include <algorithm>
 
 class COwnGrid {
 private:
@@ -22,6 +24,9 @@ private:
     int columns;
 
     std::vector<CShip> ships;
+
+    std::map<int, int> remainingShips;
+
 
 public:
 
