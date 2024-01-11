@@ -1,5 +1,3 @@
-// COwnGrid.cpp
-
 #include "COwnGrid.h"
 
 using namespace std;
@@ -23,6 +21,11 @@ COwnGrid::COwnGrid(int rows, int columns) : rows(rows), columns(columns)
 		}
 	}
 
+	remainingShips.insert(pair<int,int>(5,1)); //carrier
+	remainingShips.insert(pair<int,int>(4,2)); //battleship
+	remainingShips.insert(pair<int,int>(3,3)); //destroyer
+	remainingShips.insert(pair<int,int>(2,4)); //submarine
+
 }
 
 COwnGrid::~COwnGrid()
@@ -44,6 +47,7 @@ int COwnGrid::getColumns() const {
 char** COwnGrid::getGrid() const {
     return grid;
 }
+
 bool COwnGrid::placeShip(const CShip& ship) {
     const CGridPosition& bow = ship.getBow();
     const CGridPosition& stern = ship.getStern();
@@ -54,13 +58,50 @@ bool COwnGrid::placeShip(const CShip& ship) {
 
     // Check if the ship can be placed within the boundaries of the grid
     if (ship.isValid()) {
-        ships.push_back(ship);
+        // Check if the ship touches another ship
+        for (const auto& existingShip : ships) {
+            const std::set<CGridPosition>& existingOccupiedArea = existingShip.occupiedArea();
+
+            for (const auto& position : existingOccupiedArea) {
+                // Check if the position is adjacent to any position of the new ship
+                if (std::abs(position.getRow() - bowRow) <= 1 && std::abs(position.getColumn() - bow.getColumn()) <= 1) {
+                    return false; // Cannot place the ship, it touches another ship
+                }
+            }
+
+            // Check if any position of the new ship is adjacent to the existing ship
+            for (const auto& position : ship.occupiedArea()) {
+                if (std::abs(position.getRow() - existingShip.getBow().getRow() + 1) <= 1 &&
+                    std::abs(position.getColumn() - existingShip.getBow().getColumn()) <= 1) {
+                    return false; // Cannot place the ship, it touches another ship
+                }
+            }
+        }
+
+        // Check if the ship's occupied positions form a straight line
+        const std::set<CGridPosition>& occupiedArea = ship.occupiedArea();
+        int commonRow = -1;
+        int commonCol = -1;
+
+        for (const auto& position : occupiedArea) {
+            if (commonRow == -1 && commonCol == -1) {
+                commonRow = position.getRow();
+                commonCol = position.getColumn();
+            } else {
+                if (position.getRow() != commonRow && position.getColumn() != commonCol) {
+                    return false; // Cannot place the ship, positions are not in a straight line
+                }
+            }
+        }
+
         // Place the ship by updating the grid
         for (int row = bowRow; row <= sternRow; ++row) {
             for (int col = bow.getColumn(); col <= stern.getColumn(); ++col) {
                 grid[row][col] = '#';
             }
         }
+
+        ships.push_back(ship);
         return true; // Placement successful
     } else {
         return false; // Invalid position, placement failed
@@ -69,40 +110,9 @@ bool COwnGrid::placeShip(const CShip& ship) {
 
 
 
-bool COwnGrid::placeShipForTesting(const CShip& ship, int testRow, int testCol)
+
+
+const std::vector<CShip> COwnGrid::getShips() const
 {
-    if (ship.isValid())
-    {
-    	ships.push_back(ship);
-        auto shipPositions = ship.occupiedArea();
-        for (const auto& position : shipPositions)
-        {
-            int row = position.getRow() - 1 + testRow;
-            int col = position.getColumn() - 1 + testCol;
-
-            // Check if the position is within the bounds of the grid
-            if (row >= 0 && row < rows && col >= 0 && col < columns)
-            {
-                // Update the board's ownGrid with '#' to mark the ship's position
-                grid[row][col] = '#';
-            }
-            else
-            {
-                // Invalid position, ship cannot be placed
-                return false;
-            }
-        }
-        ships.push_back(ship);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-
-
-const std::vector<CShip> COwnGrid::getShips() const {
     return ships;
 }
