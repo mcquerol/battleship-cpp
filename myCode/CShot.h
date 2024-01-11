@@ -1,28 +1,30 @@
 
-#ifndef CSHOTS_H_
-#define CSHOTS_H_
+#ifndef CSHOT_H_
+#define CSHOT_H_
 #include "CGridPosition.h"
 
 class CShots
 {
 private:
-	/** enum shots
-	 *
-	 * this enum defines each state of the board as
-	 * one of these possible states
-	 */
-	enum shots
-	{
-		HIT = 0,
-		SUNKEN = 1,
-		NONE = 2
-	};
+
 	/** CGridPosition targetPosition
 	 *
 	 * coordinate object for which square to hit a ship
 	 */
     CGridPosition targetPosition;
 public:
+
+	/** enum shots
+	 *
+	 * this enum defines each state of the board as
+	 * one of these possible states
+	 */
+	enum Impact
+	{
+		HIT = 0,
+		SUNKEN = 1,
+		NONE = 2
+	};
 
 	/** CGridPosition constructor
 	 *
@@ -39,4 +41,4 @@ public:
 
 };
 
-#endif /* CSHOTS_H_ */
+#endif /* CSHOT_H_ */
