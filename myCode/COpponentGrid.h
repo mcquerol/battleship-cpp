@@ -3,6 +3,10 @@
 
 #include "CShip.h"
 #include <vector>
+#include <map>
+
+#include "CShots.h"
+
 class COpponentGrid {
 private:
 	char** grid;
@@ -22,6 +26,9 @@ private:
      * @supplierCardinality 0..10 
      */
     std::vector<CShip> sunkenShips;
+    std::map<CGridPosition, CShots::Impact> shots;
+
+
 public:
 
 
@@ -52,6 +59,8 @@ public:
      void markShipAsSunken(const CShip& ship);
 
      const std::vector<CShip>getSunkenShips() const;
+     const std::map<CGridPosition, CShots::Impact>& getShotsAt() const;
+     void shotResult(const CShots& shot, CShots::Impact impact);
 
 };
 #endif /* COPPONENTGRID_H */
