@@ -24,8 +24,8 @@ CConsoleView::~CConsoleView()
  *
  * prints the ownGrid and opponentGrid arrays
  */
-void CConsoleView::print() {
-
+void CConsoleView::print()
+{
 
     cout << " OWN GRID\t\t OPPONENT GRID" << endl;
     cout << " ";
@@ -54,9 +54,8 @@ void CConsoleView::print() {
 	   }
 	   cout << endl;
     }
-
-    cout << endl;
 }
+
 
 
 
