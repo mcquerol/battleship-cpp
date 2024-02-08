@@ -64,3 +64,14 @@ const std::vector<CShip> COpponentGrid::getSunkenShips() const
 {
 	return sunkenShips;
 }
+
+const std::map<CGridPosition, CShots::Impact>& COpponentGrid::getShotsAt() const
+{
+    return shots;
+}
+
+void COpponentGrid::shotResult(const CShots& shot, CShots::Impact impact)
+{
+    //const CGridPosition& position = shot.getTargetPosition();
+
+}
