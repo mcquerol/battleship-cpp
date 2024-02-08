@@ -2,11 +2,14 @@
 #define COWNGRID_H
 
 #include "CShip.h"
+#include "CGridPosition.h"
 #include <iostream>
 #include <vector>
 #include <set>
 #include <map>
 #include <algorithm>
+
+#include "CShots.h"
 
 class COwnGrid {
 private:
@@ -26,7 +29,11 @@ private:
     std::vector<CShip> ships;
 
     std::map<int, int> remainingShips;
+    std::set<CGridPosition>shotAt;
 
+    bool hasBeenShot(const CGridPosition& position) const; // helper function
+
+    bool isFinalHit(const CShip& ship, const CGridPosition& currentHit) const;
 
 public:
 
@@ -58,12 +65,14 @@ public:
 
     char** getGrid() const;
 
-    bool placeShipForTesting(const CShip& ship, int testRow, int testCol);
-
     /** COwnGrid::getShips
      * a vector which contains the coordinates of different ships
      * on the own grid
      */
+
+    CShots::Impact takeBlow(const CShots& shot);
+
     const std::vector<CShip>getShips() const;
+    const std::set<CGridPosition>getShotAt() const;
 };
 #endif /* COWNGRID_H */
