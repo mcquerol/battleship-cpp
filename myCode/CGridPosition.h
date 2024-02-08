@@ -53,7 +53,11 @@ public:
      *
      * returns true if the (current object) row and column
      * is less than the right hand operand object row and column
-     //TODO give exact reason
+     *The < operator overload is used to facilitate comparison
+      *between two CGridPosition objects.
+      *between This is crucial when sorting or comparing positions,
+      *between for example, when determining the order of positions
+      *between in a container or checking if one position is less than another
      */
     bool operator<(CGridPosition other) const;
 
