@@ -1,53 +1,59 @@
-// Standard (system) header files
 #include <iostream>
-#include <stdlib.h>
-#include "CGridPosition.h"
-#include "CShip.h"
-#include "COwnGrid.h"
-#include "COpponentGrid.h"
-#include "CBoard.h"
-#include "CConsoleView.h"
-#include <vector>
-#include <set>
+#include <cstdlib>
+
+#include "GridPosition.h"
+#include "Ship.h"
+#include "OwnGrid.h"
+#include "OpponentGrid.h"
+#include <string.h>
+#include "ConsoleView.h"
+#include "Board.h"
+#include "Shot.h"
 
 #include "part1tests.h"
 #include "part2tests.h"
 #include "part3tests.h"
 
+#include <algorithm>
+#include <set>
 using namespace std;
 
-int main() {
+int main ()
+{
 
-//	part1tests test1;
-//    test1.part1test();
-//
-//	part1tests test2;
-//    test2.part1test();
-//
-//	part1tests test3;
-//    test3.part1test();
-	CBoard b(10, 10);
+    Board board(10, 10);
+    OwnGrid& ownGrid = board.getOwnGrid();
 
-	CGridPosition p1('B', 2);
-	CGridPosition p2('B', 4);
-	CShip ship1(p1, p2);
+    // Arrange three ships on the board
+    Ship ship1(GridPosition{"B2"}, GridPosition{"B4"});
+    Ship ship2(GridPosition{"D4"}, GridPosition{"G4"});
+    Ship ship3(GridPosition{"F6"}, GridPosition{"F9"});
 
-	CGridPosition p3('D', 4);
-	CGridPosition p4('G', 4);
-	CShip ship2(p3, p4);
+    if(!ownGrid.placeShip(ship1))
+    {
+    	cout << "Failed to place ship1 on the board" << endl;
+    }
+    if(!ownGrid.placeShip(ship2))
+    {
+    	cout << "Failed to place ship2 on the board" << endl;
+    }
+    if(!ownGrid.placeShip(ship3))
+    {
+    	cout << "Failed to place ship3 on the board" << endl;
+    }
 
-	CGridPosition p5('F', 6);
-	CGridPosition p6('F', 9);
-	CShip ship3(p5, p6);
+    // Test shots
+    Shot hit1(GridPosition{"B3"});
+    Shot hit2(GridPosition{"B4"});
+    Shot hit3(GridPosition{"B5"});
 
-	b.getOwnGrid().placeShip(ship1);
-	b.getOwnGrid().placeShip(ship2);
-	b.getOwnGrid().placeShip(ship3);
+    ownGrid.takeBlow(hit1);
+    ownGrid.takeBlow(hit2);
+    ownGrid.takeBlow(hit3);
 
-	CConsoleView view(&b);
-	view.print();
+    // Create a console view and print
+    ConsoleView consoleView(&board);
+    consoleView.print();
 
-    return 0;
+	return 0;
 }
-
-
