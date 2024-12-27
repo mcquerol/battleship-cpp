@@ -5,10 +5,10 @@
  *      Author: mateo
  */
 
-#include "CShip.h"
-#include "CBoard.h"
+#include "Ship.h"
+#include "Board.h"
 #include "part2tests.h"
-#include "CConsoleView.h"
+#include "ConsoleView.h"
 
 #include <iostream>
 #include <string>
@@ -24,19 +24,19 @@ void part2tests::assertTrue(bool condition, string failedMessage)
 
 void part2tests::part2test()
 {
-    CBoard board(10, 10);
-    COwnGrid& ownGrid = board.getOwnGrid();
+    Board board(10, 10);
+    OwnGrid& ownGrid = board.getOwnGrid();
 
     // Arrange three ships on the board
-    CShip ship1(CGridPosition{"B2"}, CGridPosition{"B4"});
-    CShip ship2(CGridPosition{"D4"}, CGridPosition{"G4"});
-    CShip ship3(CGridPosition{"F6"}, CGridPosition{"F9"});
+    Ship ship1(GridPosition{"B2"}, GridPosition{"B4"});
+    Ship ship2(GridPosition{"D4"}, GridPosition{"G4"});
+    Ship ship3(GridPosition{"F6"}, GridPosition{"F9"});
 
     assertTrue(ownGrid.placeShip(ship1), "Failed to place ship1 on the board");
     assertTrue(ownGrid.placeShip(ship2), "Failed to place ship2 on the board");
     assertTrue(ownGrid.placeShip(ship3), "Failed to place ship3 on the board");
 
     // Create a console view and print
-    CConsoleView consoleView(&board);
+    ConsoleView consoleView(&board);
     consoleView.print();
 }

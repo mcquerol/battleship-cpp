@@ -13,7 +13,6 @@
 class part3tests
 {
 public:
-	part3tests();
 	void assertTrue(bool condition, std::string failedMessage);
 
 	void part3test();

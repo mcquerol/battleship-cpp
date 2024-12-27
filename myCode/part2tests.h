@@ -15,7 +15,7 @@
 class part2tests
 {
 public:
-	part2tests();
+
 	void assertTrue(bool condition, std::string failedMessage);
 
 	void part2test();
