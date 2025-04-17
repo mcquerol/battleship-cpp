@@ -1,6 +1,6 @@
 # Mark documentation as documentation (excluded from profile stats, but still shown in repo)
-html/** linguist-documentation
-*.css linguist-documentation
+html/** linguist-language=cpp
+*.css linguist-language=cpp
 
 # Hide weird auto-detected stuff
 *.gbd linguist-generated
